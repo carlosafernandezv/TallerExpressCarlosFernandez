@@ -13,12 +13,12 @@ let allStore = async (req,res) => {
     }        
 }
 
-let storeByAddres =  async (req,res) => {
+let storeByAddress =  async (req,res) => {
     try {
         console.log(req.params);
         
-        let roleQuery = req.params.x
-        let all = await  User.find({role : roleQuery})
+        let roleQuery = req.params.address
+        let all = await  Store.find({address:roleQuery})
         return res.status(200).json({
             response: all
         })
@@ -29,12 +29,12 @@ let storeByAddres =  async (req,res) => {
     }        
 }
 
-let userById =  async (req,res) => {
+let StoreByStoreName =  async (req,res) => {
     try {
         console.log(req.params);
         
-        let roleQuery = req.params.id
-        let all = await  User.findById(roleQuery)
+        let roleQuery = req.params.storeName
+        let all = await  Store.find({storeName : roleQuery})
         return res.status(200).json({
             response: all
         })
@@ -46,4 +46,4 @@ let userById =  async (req,res) => {
 }
 
 
-export {allStore,userByRole,userById} 
+export {allStore,storeByAddress,StoreByStoreName}

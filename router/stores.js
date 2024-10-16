@@ -1,22 +1,10 @@
 import { Router } from "express";
-import Store from "../models/Store.js";
+import { allStore, storeByAddress, StoreByStoreName } from "../controllers/stores/read.js";
 
-const router = Router()
+const routerStores = Router()
 
-router.get('/all',
+routerStores.get('/all', allStore)
+routerStores.get('/address/:address',storeByAddress)
+routerStores.get('/storeName/:storeName',StoreByStoreName)
 
-    async (req,res) => {
-        try {
-            let all = await Store.find()
-            return res.status(200).json({
-                response: all
-            })
-        } catch (error) {
-            return res.status(500).json({
-                response: error
-            })
-        }        
-    }
-)
-
-export default router
+export default routerStores

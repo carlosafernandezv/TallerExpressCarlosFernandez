@@ -1,22 +1,10 @@
 import { Router } from "express";
-import Product from "../models/Product.js";
+import { allProduct,productByCategory, productByProductName } from "../controllers/products/read.js";
 
-const router = Router()
+const routerProducts = Router()
 
-router.get('/all',
+routerProducts.get('/all', allProduct)
+routerProducts.get('/category/:category',productByCategory)
+routerProducts.get('/productName/:productName',productByProductName)
 
-    async (req,res) => {
-        try {
-            let all = await Product.find()
-            return res.status(200).json({
-                response: all
-            })
-        } catch (error) {
-            return res.status(500).json({
-                response: error
-            })
-        }        
-    }
-)
-
-export default router
+export default routerProducts

@@ -1,22 +1,10 @@
 import { Router } from "express";
-import Employee from "../models/Employee.js";
+import { allEmployee, employeeByPosition, employeeByEmployeeName } from "../controllers/employees/read.js";
 
-const router = Router()
+const routerEmployees = Router()
 
-router.get('/all',
+routerEmployees.get('/all', allEmployee)
+routerEmployees.get('/position/:position',employeeByPosition)
+routerEmployees.get('/employeeName/:employeeName',employeeByEmployeeName)
 
-    async (req,res) => {
-        try {
-            let all = await Employee.find()
-            return res.status(200).json({
-                response: all
-            })
-        } catch (error) {
-            return res.status(500).json({
-                response: error
-            })
-        }        
-    }
-)
-
-export default router
+export default routerEmployees
