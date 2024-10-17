@@ -1,19 +1,17 @@
 import Product from "../../models/Product.js";
 
-let allProduct = async (req,res) => {
+let allProduct = async (req,res,next) => {
     try {
         let all = await Product.find()
         return res.status(200).json({
             response: all
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }        
 }
 
-let productByProductName =  async (req,res) => {
+let productByProductName =  async (req,res,next) => {
     try {
         console.log(req.params);
         
@@ -23,13 +21,11 @@ let productByProductName =  async (req,res) => {
             response: all
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }        
 }
 
-let productByCategory =  async (req,res) => {
+let productByCategory =  async (req,res,next) => {
     try {
         console.log(req.params);
         
@@ -39,9 +35,7 @@ let productByCategory =  async (req,res) => {
             response: all
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }        
 }
 

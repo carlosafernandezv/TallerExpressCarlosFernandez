@@ -4,10 +4,14 @@ import "./config/database.js"
 import cors from "cors"
 import morgan from "morgan"
 import indexRouter from "./router/index.js"
+import not_found_handler from "./middlewares/not_found_handler.js";
+import error_handler from "./middlewares/error_handler.js"
+import { handleBadRequest } from './middlewares/handleBadRequest.js';
+
 
 const server = express()
 
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 
 const ready = ()=> console.log("server ready port: "+PORT);
 
@@ -18,7 +22,9 @@ server.use(morgan('dev'))
 
 //router
 server.use('/api', indexRouter)
-
+server.use(not_found_handler)
+server.use(error_handler)
+server.use(handleBadRequest);
 
 
 server.listen(PORT,ready) 

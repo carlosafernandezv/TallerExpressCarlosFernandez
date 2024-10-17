@@ -1,0 +1,10 @@
+const handleBadRequest = (req, res, next) => {
+    if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).json({
+            error: 'Bad Request - The request body is missing or empty.'
+        });
+    }
+    next();
+};
+
+export { handleBadRequest };

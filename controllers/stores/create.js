@@ -1,6 +1,6 @@
 import Store from "../../models/Store.js";
 
-let create = async (req,res) =>{
+let create = async (req,res,next) =>{
     try {
         let store = req.body
         let all = await Store.create(store)
@@ -8,9 +8,7 @@ let create = async (req,res) =>{
             response: all
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 

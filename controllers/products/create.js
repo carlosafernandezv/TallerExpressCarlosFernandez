@@ -1,6 +1,6 @@
 import Product from "../../models/Product.js";
 
-let create = async (req,res) =>{
+let create = async (req,res,next) =>{
     try {
         let product = req.body
         let all = await Product.create(product)
@@ -8,9 +8,7 @@ let create = async (req,res) =>{
             response: all
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 

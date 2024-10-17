@@ -1,6 +1,6 @@
 import Employee from "../../models/Employee.js";
 
-let create = async (req,res) =>{
+let create = async (req,res,next) =>{
     try {
         let employee = req.body
         let all = await Employee.create(employee)
@@ -8,9 +8,7 @@ let create = async (req,res) =>{
             response: all
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 
